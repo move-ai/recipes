@@ -48,9 +48,9 @@ Most of the code examples are written in Python, although the concepts can be ap
 Features:
 * Full body tracking
 * Hand and finger tracking
-* FBX, USD output formats
+* FBX, USD and Blend 3D output formats
 * Track up to 3 people (coming soon)
-* Supports video from any camera but video from known cameras give the best results
+* Supports any video but best results are obtained when the camera is known
 
 [FAQs](./FAQs.md)
 
@@ -59,20 +59,22 @@ Features:
 * Full body tracking
 * Hand and finger tracking
 * Track up to TK people
-* Track volumes of 100m x 50m
-* FBX, USD output formats
+* Track volumes of TKm x TKm
+* FBX, USD and Blend 3D output formats
 * Supports up to TK cameras
 * Tracks large spherical objects (e.g. basketballs, volleyballs)
-* Supports video from any camera but video from known cameras give the best results
+* Supports any video but best results are obtained when the camera is known
 
 ## Code examples
-### Python
-#### Example 1: Generate a 3D animation file of a single person from a single camera from an unknown camera
-#### Example 2: Generate a 3D animation file of a single person from a single camera from an iPhone 13
-#### Example 3: Convert a 3D animation file to CSV
-#### Example 4: Visualise foot step detection and ground reaction forces from a 3D animation file
-#### Example 5: Estimate bone lengths from a 3D animation file
-#### Example 6: Retarget animation to a character and render the result in a different environment
+### Example 1: Generate 3D animation data of a single person from a single video from an unknown camera
+<p align="left">
+    <img src="/images/example_1.gif" width="150px" alt="example 1 image" />
+</p>
 
-### JavaScript
-#### Example 1: Generate a 3D animation file of a single person from a single camera from an unknown camera
+[Python](./examples/python/Example_1.ipynb), [Javascript](./examples/javascript/example_1/README.md)
+
+### Example 2: Generate a 3D animation file of a single person from a single video from an iPhone 13
+### Example 3: Convert a 3D animation file to CSV
+### Example 4: Visualise foot step detection and ground reaction forces from a 3D animation file
+### Example 5: Estimate bone lengths from a 3D animation file
+### Example 6: Retarget animation to a character and render the result in a different environment

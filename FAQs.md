@@ -1,25 +1,32 @@
 # FAQs
 ## Single-Camera
-Q: What is the processing time for a 10s single-camera video?
-A: Approximately 5 minutes.
+### How do I get the highest quality results?  
+Ensure the following:
+- A person is fully visible at the start of the video.
+- The camera is static for the duration of the capture.
+- The entire actor is completely visible in every frame of the capture.
+- There are no other people visible at any time during the capture.
+- The actor holds an “A pose” for 1 second at the start of the video.
+- Clothing worn by the actor has good contrast to their background.
+- The actor is well lit.
 
-Q: What is the processing time for a 10s multi-camera video?
-A: For 4 cameras approximately 10 mins. For 8 cameras approximately 20 mins.
+### What is the processing time for a 10s single-camera video?  
+Approximately TK minutes.
 
-Q: What type of video formats are supported?
-A: Frame rate, length, size, format, pixels, orientation.
+### What is the processing time for a 10s multi-camera video?  
+For 4 cameras, approximately TK mins. For TK cameras, approximately TK mins.
 
-Q: What type of motion is supported.
-A: All types. The system expects a T-pose at the beginning.
+### What type of video formats are supported?  
+TO DO (frame rate, length, size, format, pixels, orientation).
 
-Q: If there are multiple people in the video, who gets tracked?
-A: The person that is nearest the camera.
+### What type of motion is supported.  
+TO DO.
 
-Q: How do I get the highest quality results?
-A: TK. Give a Move file. T-pose.
+### If there are multiple people in the video, who gets tracked?  
+TO DO.
 
-Q: What output formats are available?
-A: TK. Frame rate, rig, etc
+### What 3D output formats are available?  
+FBX, USD, Blend.
 
-Q: What rig is the motion exported on?
-A: Our custom rig which uses the bone name conventions of MotionBuilder's HIK.
+### What rig is the motion exported on?  
+Our custom rig which uses the bone name conventions of MotionBuilder's HIK.

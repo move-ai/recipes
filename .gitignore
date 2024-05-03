@@ -172,8 +172,15 @@ pyrightconfig.json
 # Data
 *.DS_Store
 
+# Input videos
+videos/
+
 # Output files
 output/
 
 # PyCharm files
 .idea/
+
+# Node dependency directories
+node_modules/
+jspm_packages/
