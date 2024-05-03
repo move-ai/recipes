@@ -1,0 +1,10 @@
+{
+  "name": "move_ai_js_example_1",
+  "version": "0.1.0",
+  "description": "Generate 3D animation data of a single person from a single video from an unknown camera.",
+  "homepage": "https://www.move.ai",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security"
+  }
+}
