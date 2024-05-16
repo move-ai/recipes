@@ -12,7 +12,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-    "name": "Move SDK",
+    "name": "Move.ai SDK",
     "author": "Denis Cera",
     "description": "Move.ai SDK",
     "blender": (4, 1, 0),
@@ -55,15 +55,40 @@ uninstalled_dependencies = check_pip_dependencies(dependencies)
 install_pip_dependencies(uninstalled_dependencies)
 
 import bpy  # noqa: E402
-from .ui import MOVE_SDK_PT_main_panel  # noqa: E402
-from .operators import MOVE_SDK_OT_run  # noqa: E402
-from .properties import MoveSDKProperties, MoveSDKPropertiesGeneral  # noqa: E402
+from .ui import (  # noqa: E402
+    MOVE_SDK_PT_main_panel,
+    MOVE_SDK_PT_general_panel,
+    MOVE_SDK_PT_retargeting_panel,
+    MOVE_SDK_PT_retargeting_source_panel,
+    MOVE_SDK_PT_retargeting_target_panel,
+)  # noqa: E402
+from .operators import (  # noqa: E402
+    MOVE_SDK_OT_run,
+    MOVE_SDK_OT_retarget,
+    MOVE_SDK_OT_retargeting_clear,
+)  # noqa: E402
+from .properties import (  # noqa: E402
+    MoveSDKPropertiesGeneral,
+    MoveSDKPropertiesRetargetingSource,
+    MoveSDKPropertiesRetargetingTarget,
+    MoveSDKPropertiesRetargeting,
+    MoveSDKProperties,
+)  # noqa: E402
 
 
 classes = (
     MOVE_SDK_PT_main_panel,
+    MOVE_SDK_PT_general_panel,
+    MOVE_SDK_PT_retargeting_panel,
+    MOVE_SDK_PT_retargeting_source_panel,
+    MOVE_SDK_PT_retargeting_target_panel,
     MOVE_SDK_OT_run,
+    MOVE_SDK_OT_retarget,
+    MOVE_SDK_OT_retargeting_clear,
     MoveSDKPropertiesGeneral,
+    MoveSDKPropertiesRetargetingSource,
+    MoveSDKPropertiesRetargetingTarget,
+    MoveSDKPropertiesRetargeting,
     MoveSDKProperties,
 )
 
