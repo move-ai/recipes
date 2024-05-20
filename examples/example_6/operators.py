@@ -84,7 +84,7 @@ class MOVE_SDK_OT_retargeting_clear(Operator):
                     bone.constraints.remove(constraint)
 
         # Reset hips
-        target_bone = target_obj.pose.bones.get(scene.move_sdk.retargeting.target.hips)
+        target_bone = target_obj.pose.bones.get(scene.move_sdk.retargeting.target.mapping.hips)
 
         # if self.save_original_transforms:
         if retargeted_previosly:
@@ -128,17 +128,15 @@ class MOVE_SDK_OT_retarget(Operator):
             return {"CANCELLED"}
 
         target_bone_properties_names = list(
-            scene.move_sdk.retargeting.target.__annotations__.keys()
+            scene.move_sdk.retargeting.target.mapping.__annotations__.keys()
         )
 
         for bone_prop_name in target_bone_properties_names:
-            if bone_prop_name in ["rig", "hips_original_transforms"]:
-                continue
             target_bone_name = getattr(
-                scene.move_sdk.retargeting.target, bone_prop_name
+                scene.move_sdk.retargeting.target.mapping, bone_prop_name
             )
             source_bone_name = getattr(
-                scene.move_sdk.retargeting.source, bone_prop_name
+                scene.move_sdk.retargeting.source.mapping, bone_prop_name
             )
             target_bone = target_obj.pose.bones.get(target_bone_name)
             source_bone = source_obj.pose.bones.get(source_bone_name)

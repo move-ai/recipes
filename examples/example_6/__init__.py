@@ -69,8 +69,8 @@ from .operators import (  # noqa: E402
 )  # noqa: E402
 from .properties import (  # noqa: E402
     MoveSDKPropertiesGeneral,
-    MoveSDKPropertiesRetargetingSource,
-    MoveSDKPropertiesRetargetingTarget,
+    MoveSDKPropertiesMapping,
+    MoveSDKPropertiesRetargetingEntity,
     MoveSDKPropertiesRetargeting,
     MoveSDKProperties,
 )  # noqa: E402
@@ -86,8 +86,8 @@ classes = (
     MOVE_SDK_OT_retarget,
     MOVE_SDK_OT_retargeting_clear,
     MoveSDKPropertiesGeneral,
-    MoveSDKPropertiesRetargetingSource,
-    MoveSDKPropertiesRetargetingTarget,
+    MoveSDKPropertiesMapping,
+    MoveSDKPropertiesRetargetingEntity,
     MoveSDKPropertiesRetargeting,
     MoveSDKProperties,
 )
