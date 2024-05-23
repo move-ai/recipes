@@ -7,7 +7,8 @@ import sys
 import bpy_types
 from mathutils import Matrix
 import numpy as np
-
+import addon_utils
+from pathlib import Path
 
 class MoveAPI:
     def __init__(self, api_key, endpoint_url=None):
@@ -148,3 +149,12 @@ def get_matrix_height(matrix_world: Matrix):
 def flatten_matrix(mat):
     dim = len(mat)
     return [mat[j][i] for i in range(dim) for j in range(dim)]
+
+def get_mapping_folder(rig_type="source"):
+    for mod in addon_utils.modules():
+        if mod.bl_info['name'] == "Move.ai SDK":
+            filepath = Path(mod.__file__)
+
+    mapping_folder = filepath.parent / "data/mapping_templates" / rig_type
+
+    return mapping_folder
