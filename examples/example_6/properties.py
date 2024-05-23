@@ -1,7 +1,32 @@
 import bpy
 from mathutils import Matrix
-from .utils import flatten_matrix
+from .utils import flatten_matrix, get_mapping_folder
+import addon_utils
+from pathlib import Path
+import os
 
+
+
+
+def my_settings_callback(scene, context, rig_type):
+    # get to mapping_templates folder or create if there isn't one
+    mapping_folder = get_mapping_folder(rig_type)
+
+
+    json_presets = []
+    files = os.listdir(mapping_folder)
+    # get only json files
+    for file in files:
+        _, file_extension = os.path.splitext(file)
+        if file_extension == ".json":
+            json_presets.append(os.path.splitext(file)[0])
+
+    items = []
+    for i in json_presets:
+        s = (i, i, "")
+        items.append(s)
+
+    return items
 
 class MoveSDKPropertiesGeneral(bpy.types.PropertyGroup):
     move_api_key: bpy.props.StringProperty(
@@ -166,6 +191,21 @@ class MoveSDKPropertiesRetargetingEntity(bpy.types.PropertyGroup):
     hips_original_transforms: bpy.props.FloatVectorProperty(
         subtype="MATRIX", size=16, default=flatten_matrix(Matrix())
     )  # , default=Matrix())  # type: ignore
+
+    def get_presets_items(self, context):
+        if self == context.scene.move_sdk.retargeting.source:
+            return my_settings_callback(self, context, "source")
+        elif self == context.scene.move_sdk.retargeting.target:
+            return my_settings_callback(self, context, "target")
+        else:
+            return []
+
+    presets: bpy.props.EnumProperty(
+        name="Presets",
+        items=get_presets_items
+    )  # type: ignore
+
+
 
 
 class MoveSDKPropertiesRetargeting(bpy.types.PropertyGroup):
