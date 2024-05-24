@@ -6,12 +6,9 @@ from pathlib import Path
 import os
 
 
-
-
 def my_settings_callback(scene, context, rig_type):
     # get to mapping_templates folder or create if there isn't one
     mapping_folder = get_mapping_folder(rig_type)
-
 
     json_presets = []
     files = os.listdir(mapping_folder)
@@ -27,6 +24,7 @@ def my_settings_callback(scene, context, rig_type):
         items.append(s)
 
     return items
+
 
 class MoveSDKPropertiesGeneral(bpy.types.PropertyGroup):
     move_api_key: bpy.props.StringProperty(
@@ -184,9 +182,10 @@ class MoveSDKPropertiesMapping(bpy.types.PropertyGroup):
         name="LeftPinky3", default="_1:LeftHandPinky3"
     )  # type: ignore
 
+
 class MoveSDKPropertiesRetargetingEntity(bpy.types.PropertyGroup):
     rig: bpy.props.PointerProperty(type=bpy.types.Armature)  # type: ignore
-    mapping: bpy.props.PointerProperty(type=MoveSDKPropertiesMapping)  # type: ignore    
+    mapping: bpy.props.PointerProperty(type=MoveSDKPropertiesMapping)  # type: ignore
 
     hips_original_transforms: bpy.props.FloatVectorProperty(
         subtype="MATRIX", size=16, default=flatten_matrix(Matrix())
@@ -200,12 +199,7 @@ class MoveSDKPropertiesRetargetingEntity(bpy.types.PropertyGroup):
         else:
             return []
 
-    presets: bpy.props.EnumProperty(
-        name="Presets",
-        items=get_presets_items
-    )  # type: ignore
-
-
+    presets: bpy.props.EnumProperty(name="Presets", items=get_presets_items)  # type: ignore
 
 
 class MoveSDKPropertiesRetargeting(bpy.types.PropertyGroup):
@@ -213,9 +207,25 @@ class MoveSDKPropertiesRetargeting(bpy.types.PropertyGroup):
     target: bpy.props.PointerProperty(type=MoveSDKPropertiesRetargetingEntity)  # type: ignore
 
 
+class MoveSDKPropertiesAppend(bpy.types.PropertyGroup):
+    filepath: bpy.props.StringProperty(
+        name=".blend path",
+        description=".blend path",
+        default="",
+        subtype="FILE_PATH",
+    )  # type: ignore
+    import_scene: bpy.props.BoolProperty(
+        name="Import scene", description="Import scene settings", default=True
+    )  # type: ignore
+    import_world: bpy.props.BoolProperty(
+        name="Import world", description="Import world settings", default=True
+    )  # type: ignore
+
+
 class MoveSDKProperties(bpy.types.PropertyGroup):
     general: bpy.props.PointerProperty(type=MoveSDKPropertiesGeneral)  # type: ignore
     retargeting: bpy.props.PointerProperty(type=MoveSDKPropertiesRetargeting)  # type: ignore
+    append: bpy.props.PointerProperty(type=MoveSDKPropertiesAppend)  # type: ignore
 
     def register():
         bpy.types.Scene.move_sdk = bpy.props.PointerProperty(type=MoveSDKProperties)
