@@ -56,7 +56,6 @@ install_pip_dependencies(uninstalled_dependencies)
 
 import bpy  # noqa: E402
 from .ui import (  # noqa: E402
-    MOVE_SDK_PT_main_panel,
     MOVE_SDK_PT_general_panel,
     MOVE_SDK_PT_retargeting_panel,
     MOVE_SDK_PT_retargeting_source_panel,
@@ -65,6 +64,16 @@ from .ui import (  # noqa: E402
     MOVE_SDK_PT_retargeting_target_mapping_panel,
     MOVE_SDK_PT_retargeting_source_presets_panel,
     MOVE_SDK_PT_retargeting_target_presets_panel,
+    MOVE_SDK_PT_scene_panel,
+    MOVE_SDK_PT_ffmpeg_presets,
+    MOVE_SDK_PT_output,
+    MOVE_SDK_PT_output_views,
+    MOVE_SDK_PT_output_color_management,
+    MOVE_SDK_PT_encoding,
+    MOVE_SDK_PT_encoding_video,
+    MOVE_SDK_PT_encoding_audio,
+    MOVE_SDK_UL_renderviews,
+
 )  # noqa: E402
 from .operators import (  # noqa: E402
     MOVE_SDK_OT_run,
@@ -75,18 +84,19 @@ from .operators import (  # noqa: E402
     MOVE_SDK_OT_retargeting_load_preset,
     MOVE_SDK_OT_retargeting_delete_preset,
     MOVE_SDK_OT_retargeting_rename_preset,
+    MOVE_SDK_OT_append_file
 )  # noqa: E402
 from .properties import (  # noqa: E402
     MoveSDKPropertiesGeneral,
     MoveSDKPropertiesMapping,
     MoveSDKPropertiesRetargetingEntity,
     MoveSDKPropertiesRetargeting,
+    MoveSDKPropertiesAppend,
     MoveSDKProperties,
 )  # noqa: E402
 
 
 classes = (
-    MOVE_SDK_PT_main_panel,
     MOVE_SDK_PT_general_panel,
     MOVE_SDK_PT_retargeting_panel,
     MOVE_SDK_PT_retargeting_source_panel,
@@ -95,6 +105,15 @@ classes = (
     MOVE_SDK_PT_retargeting_target_mapping_panel,
     MOVE_SDK_PT_retargeting_source_presets_panel,
     MOVE_SDK_PT_retargeting_target_presets_panel,
+    MOVE_SDK_PT_scene_panel,
+    MOVE_SDK_PT_ffmpeg_presets,
+    MOVE_SDK_PT_output,
+    MOVE_SDK_PT_output_views,
+    MOVE_SDK_PT_output_color_management,
+    MOVE_SDK_PT_encoding,
+    MOVE_SDK_PT_encoding_video,
+    MOVE_SDK_PT_encoding_audio,
+    MOVE_SDK_UL_renderviews,
     MOVE_SDK_OT_run,
     MOVE_SDK_OT_retarget,
     MOVE_SDK_OT_retargeting_clear,
@@ -103,10 +122,12 @@ classes = (
     MOVE_SDK_OT_retargeting_load_preset,
     MOVE_SDK_OT_retargeting_delete_preset,
     MOVE_SDK_OT_retargeting_rename_preset,
+    MOVE_SDK_OT_append_file,
     MoveSDKPropertiesGeneral,
     MoveSDKPropertiesMapping,
     MoveSDKPropertiesRetargetingEntity,
     MoveSDKPropertiesRetargeting,
+    MoveSDKPropertiesAppend,
     MoveSDKProperties,
 )
 
