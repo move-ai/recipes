@@ -212,6 +212,8 @@ class MOVE_SDK_PT_retargeting_mapping_panel(bpy.types.Panel):
             populate_panel_with_bones(
                 row, scene, rig_type, ids=[47, 48, 49], add_label=False
             )
+        else:
+            layout.label(text="No armature selected or invalid selection")
 
 
 class MOVE_SDK_PT_retargeting_target_panel(MOVE_SDK_PT_retargeting_mapping_panel):
