@@ -152,7 +152,7 @@ def flatten_matrix(mat):
 
 def get_mapping_folder(rig_type="source"):
     for mod in addon_utils.modules():
-        if mod.bl_info['name'] == "Move.ai SDK":
+        if mod.bl_info['name'] == "Move SDK":
             filepath = Path(mod.__file__)
 
     mapping_folder = filepath.parent / "data/mapping_templates" / rig_type

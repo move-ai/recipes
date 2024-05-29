@@ -12,7 +12,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-    "name": "Move.ai SDK",
+    "name": "Move SDK",
     "author": "Denis Cera",
     "description": "Move.ai SDK",
     "blender": (4, 1, 0),
