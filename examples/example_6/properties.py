@@ -142,6 +142,20 @@ class MoveSDKPropertiesRetargeting(bpy.types.PropertyGroup):
 
 
 class MoveSDKPropertiesAppend(bpy.types.PropertyGroup):
+    test_rig_path: bpy.props.StringProperty(
+        name="Test rig path",
+        description="Test rig path",
+        default="",
+        get=lambda self: str(Path(__file__).parent / "data" / "rigs" / "wingit_cat.blend"),
+    )  # type: ignore
+
+    test_scene_path: bpy.props.StringProperty(
+        name="Test scene path",
+        description="Test scene path",
+        default="",
+        get=lambda self: str(Path(__file__).parent / "data" / "scenes" / "wing_it_barn.blend"),
+    )  # type: ignore
+
     filepath: bpy.props.StringProperty(
         name=".blend path",
         description=".blend path",

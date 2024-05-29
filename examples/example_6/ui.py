@@ -119,6 +119,22 @@ class MOVE_SDK_PT_scene_panel(bpy.types.Panel):
         layout.operator(MOVE_SDK_OT_append_file.bl_idname)
 
 
+class MOVE_SDK_PT_test_files_panel(bpy.types.Panel):
+    bl_label = "Test Files"
+    bl_idname = "MOVE_SDK_PT_test_files_panel"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "Move.ai SDK"
+    bl_options = {"DEFAULT_CLOSED"}
+    bl_parent_id = "MOVE_SDK_PT_scene_panel"
+
+    def draw(self, context):
+        layout = self.layout
+
+        layout.prop(context.scene.move_sdk.append, "test_rig_path")
+        layout.prop(context.scene.move_sdk.append, "test_scene_path")
+
+
 class MOVE_SDK_PT_retargeting_mapping_panel(bpy.types.Panel):
     def draw_retargeting_panel(self, context, rig_type):
         layout = self.layout
