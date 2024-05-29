@@ -13,6 +13,9 @@ from .utils import (
     get_matrix_height,
     flatten_matrix,
     get_mapping_folder,
+    add_bone,
+    copy_animation_curves,
+    select_only_one_object
 )
 import os
 from mathutils import Matrix
@@ -29,39 +32,71 @@ class MOVE_SDK_OT_run(Operator):
     bl_idname = "move_sdk.run"
     bl_options = {"REGISTER", "UNDO", "PRESET"}
 
-    def execute(self, context: bpy.types.Context):
-        context.window_manager.progress_begin(0, 100)
+    _timer = None
+    _job = None
+    _move = None
+    _attempts = 0
+    _outputs = None
+    _input_video_path = None
+    _output_dir = None
+    _max_attempts = 1200
 
-        move = MoveAPI(context.scene.move_sdk.general.move_api_key)
-        input_video_path = context.scene.move_sdk.general.input_video_path
-        video_file_id = move.create_files(input_video_path)
-        take = move.create_take(video_file_id)
-        job = move.create_job(take.id)
-        attempts = 0
-        while job.state != "FAILED" and attempts < 100:
-            job = move.get_job(job.id)
-            update_str = f"[{datetime.now().isoformat()} | {attempts}] Job {job.id} is {job.state}"
+    def modal(self, context, event):
+        if event.type == 'TIMER':
+            self._attempts += 1
+            job = self._move.get_job(self._job.id)
+            update_str = f"Move.ai is {job.state}. Attempt {self._attempts}. Job id: {job.id} is {job.state}"
             print(update_str)
-            context.window_manager.progress_update(attempts)
+            # context.workspace.status_text_set(update_str)  # Update status bar directly
+            self.report({"INFO"}, update_str)  # Update Info panel
+            context.window_manager.progress_update(self._attempts)
+            context.area.tag_redraw()  # Redraw the UI to reflect updates
+
             if job.state == "FINISHED":
-                input_video_filename = os.path.basename(input_video_path)
-                outputs = move.download_outputs(
+                input_video_filename = os.path.basename(self._input_video_path)
+                self._outputs = self._move.download_outputs(
                     job.id,
-                    context.scene.move_sdk.general.output_dir,
+                    self._output_dir,
                     input_video_filename.split(".")[0],
                 )
-                print(outputs)
-                break
-            else:
-                time.sleep(30)
-                attempts += 1
+                print(self._outputs)
+                context.window_manager.progress_end()
+                if context.scene.move_sdk.general.import_fbx:
+                    bpy.ops.import_scene.fbx(filepath=self._outputs[4])
+                context.window_manager.event_timer_remove(self._timer)
+                context.workspace.status_text_set(None)  # Clear status bar
+                self.report({"INFO"}, "Job completed successfully")
+                context.area.tag_redraw()
+                return {'FINISHED'}
+            elif job.state == "FAILED" or self._attempts >= self._max_attempts:
+                self.report({"ERROR"}, "Job failed or maximum attempts reached")
+                context.window_manager.progress_end()
+                context.window_manager.event_timer_remove(self._timer)
+                context.workspace.status_text_set(None)  # Clear status bar
+                context.area.tag_redraw()
+                return {'CANCELLED'}
+            
+        elif event.type == 'ESC':
+            self.report({"INFO"}, "Job cancelled by user")
+            context.window_manager.event_timer_remove(self._timer)
+            return {'CANCELLED'}
 
-        if context.scene.move_sdk.general.import_fbx:
-            bpy.ops.import_scene.fbx(filepath=outputs[4])
+        return {'RUNNING_MODAL'}
 
-        context.window_manager.progress_end()
+    def execute(self, context):
+        self._move = MoveAPI(context.scene.move_sdk.general.move_api_key)
+        self._input_video_path = context.scene.move_sdk.general.input_video_path
+        self._output_dir = context.scene.move_sdk.general.output_dir
 
-        return {"FINISHED"}
+        video_file_id = self._move.create_files(self._input_video_path)
+        take = self._move.create_take(video_file_id)
+        self._job = self._move.create_job(take.id)
+        self._attempts = 0
+
+        context.window_manager.progress_begin(0, 100)
+        self._timer = context.window_manager.event_timer_add(1.0, window=context.window)
+        context.window_manager.modal_handler_add(self)
+        return {'RUNNING_MODAL'}
 
 
 class MOVE_SDK_OT_retargeting_clear(Operator):
@@ -79,6 +114,9 @@ class MOVE_SDK_OT_retargeting_clear(Operator):
         scene = context.scene
         target_armature = scene.move_sdk.retargeting.target.rig
         target_obj = get_object_of_armature(target_armature.name)
+
+        source_armature = scene.move_sdk.retargeting.source.rig
+        source_obj = get_object_of_armature(source_armature.name)
 
         retargeted_previosly = False
 
@@ -98,6 +136,31 @@ class MOVE_SDK_OT_retargeting_clear(Operator):
             target_bone.matrix = (
                 scene.move_sdk.retargeting.target.hips_original_transforms
             )
+
+        # TODO
+        # current_selection = bpy.context.selected_objects
+        # current_active_obj = bpy.context.view_layer.objects.active
+        # select_only_one_object(source_obj)
+        # original_mode = bpy.context.object.mode
+        # bpy.ops.object.mode_set(mode='EDIT')
+        # for edit_bone in source_obj.data.edit_bones:
+        #     if edit_bone.name.startswith('Move.ai retargeting:'):
+        #         source_obj.data.edit_bones.remove(edit_bone)
+
+        # for fcurve in source_obj.animation_data.action.fcurves:
+        #     if fcurve.data_path.startswith('pose.bones["Move.ai retargeting:'):
+        #         source_obj.animation_data.action.fcurves.remove(fcurve)
+
+        # bpy.ops.object.mode_set(mode=original_mode)
+        # # deselect everything
+        # for selected_obj in bpy.context.selected_objects:
+        #     selected_obj.select_set(False)
+        # # get original selection back
+        # for obj in current_selection:
+        #     obj.select_set(True)
+        # bpy.context.view_layer.objects.active = current_active_obj
+
+        
 
         return {"FINISHED"}
 
@@ -157,13 +220,16 @@ class MOVE_SDK_OT_retarget(Operator):
         return {"FINISHED"}
 
     def retarget_rotation(self, source_obj, target_bone, source_bone):
-        add_constraint(
+        copy_rotation = add_constraint(
             target_bone,
             "Move.ai retargeting: Copy Rotation",
             "COPY_ROTATION",
             target=source_obj,
             subtarget=source_bone.name,
         )
+
+        copy_rotation.target_space = "POSE"
+        copy_rotation.owner_space = "POSE"
 
         offset_rot = get_offsets_rot(
             target_bone,
@@ -188,6 +254,36 @@ class MOVE_SDK_OT_retarget(Operator):
         offset_constraint.to_min_z_rot = offset_rot[2]
 
     def retarget_location(self, context, source_obj, target_bone, source_bone):
+        # TODO
+        # # Create temp hips bone, we're going to offset the hips movement on it for better retargeting
+        # current_selection = bpy.context.selected_objects
+        # current_active_obj = bpy.context.view_layer.objects.active
+        # select_only_one_object(source_obj)
+        # original_mode = bpy.context.object.mode
+        # bpy.ops.object.mode_set(mode='EDIT')
+        # bpy.context.view_layer.update()
+        # head = source_obj.data.edit_bones[source_bone.name].head.copy()
+        # tail = source_obj.data.edit_bones[source_bone.name].tail.copy()
+        # bpy.ops.object.mode_set(mode=original_mode)
+
+        # parent = source_obj.data.bones[source_bone.name].parent.name
+        # if not source_obj.data.bones.get('Move.ai retargeting: Temp Hips'):
+        #     temp_hips_bone = add_bone(source_obj, 'Move.ai retargeting: Temp Hips', parent_bone=parent, head=head, tail=tail)
+        # else:
+        #     temp_hips_bone = source_obj.pose.bones['Move.ai retargeting: Temp Hips']
+
+        # copy_animation_curves(source_obj, source_bone.name, source_obj, temp_hips_bone.name)
+
+        # source_bone = temp_hips_bone
+
+        # # deselect everything
+        # for selected_obj in bpy.context.selected_objects:
+        #     selected_obj.select_set(False)
+        # # get original selection back
+        # for obj in current_selection:
+        #     obj.select_set(True)
+        # bpy.context.view_layer.objects.active = current_active_obj
+
         target_bone_matrix = get_matrix(target_bone)
         source_bone_matrix = get_matrix(source_bone)
 

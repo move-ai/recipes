@@ -12,7 +12,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 bl_info = {
-    "name": "Move.ai SDK",
+    "name": "Move SDK",
     "author": "Denis Cera",
     "description": "Move.ai SDK",
     "blender": (4, 1, 0),
@@ -65,6 +65,7 @@ from .ui import (  # noqa: E402
     MOVE_SDK_PT_retargeting_source_presets_panel,
     MOVE_SDK_PT_retargeting_target_presets_panel,
     MOVE_SDK_PT_scene_panel,
+    MOVE_SDK_PT_test_files_panel,
     MOVE_SDK_PT_ffmpeg_presets,
     MOVE_SDK_PT_output,
     MOVE_SDK_PT_output_views,
@@ -106,6 +107,7 @@ classes = (
     MOVE_SDK_PT_retargeting_source_presets_panel,
     MOVE_SDK_PT_retargeting_target_presets_panel,
     MOVE_SDK_PT_scene_panel,
+    MOVE_SDK_PT_test_files_panel,
     MOVE_SDK_PT_ffmpeg_presets,
     MOVE_SDK_PT_output,
     MOVE_SDK_PT_output_views,
