@@ -188,13 +188,16 @@ class MOVE_SDK_OT_retarget(Operator):
         return {"FINISHED"}
 
     def retarget_rotation(self, source_obj, target_bone, source_bone):
-        add_constraint(
+        copy_rotation = add_constraint(
             target_bone,
             "Move.ai retargeting: Copy Rotation",
             "COPY_ROTATION",
             target=source_obj,
             subtarget=source_bone.name,
         )
+
+        copy_rotation.target_space = "POSE"
+        copy_rotation.owner_space = "POSE"
 
         offset_rot = get_offsets_rot(
             target_bone,
