@@ -13,6 +13,9 @@ from .utils import (
     get_matrix_height,
     flatten_matrix,
     get_mapping_folder,
+    add_bone,
+    copy_animation_curves,
+    select_only_one_object
 )
 import os
 from mathutils import Matrix
@@ -80,6 +83,9 @@ class MOVE_SDK_OT_retargeting_clear(Operator):
         target_armature = scene.move_sdk.retargeting.target.rig
         target_obj = get_object_of_armature(target_armature.name)
 
+        source_armature = scene.move_sdk.retargeting.source.rig
+        source_obj = get_object_of_armature(source_armature.name)
+
         retargeted_previosly = False
 
         for bone in target_obj.pose.bones:
@@ -98,6 +104,31 @@ class MOVE_SDK_OT_retargeting_clear(Operator):
             target_bone.matrix = (
                 scene.move_sdk.retargeting.target.hips_original_transforms
             )
+
+        # TODO
+        # current_selection = bpy.context.selected_objects
+        # current_active_obj = bpy.context.view_layer.objects.active
+        # select_only_one_object(source_obj)
+        # original_mode = bpy.context.object.mode
+        # bpy.ops.object.mode_set(mode='EDIT')
+        # for edit_bone in source_obj.data.edit_bones:
+        #     if edit_bone.name.startswith('Move.ai retargeting:'):
+        #         source_obj.data.edit_bones.remove(edit_bone)
+
+        # for fcurve in source_obj.animation_data.action.fcurves:
+        #     if fcurve.data_path.startswith('pose.bones["Move.ai retargeting:'):
+        #         source_obj.animation_data.action.fcurves.remove(fcurve)
+
+        # bpy.ops.object.mode_set(mode=original_mode)
+        # # deselect everything
+        # for selected_obj in bpy.context.selected_objects:
+        #     selected_obj.select_set(False)
+        # # get original selection back
+        # for obj in current_selection:
+        #     obj.select_set(True)
+        # bpy.context.view_layer.objects.active = current_active_obj
+
+        
 
         return {"FINISHED"}
 
@@ -188,6 +219,36 @@ class MOVE_SDK_OT_retarget(Operator):
         offset_constraint.to_min_z_rot = offset_rot[2]
 
     def retarget_location(self, context, source_obj, target_bone, source_bone):
+        # TODO
+        # # Create temp hips bone, we're going to offset the hips movement on it for better retargeting
+        # current_selection = bpy.context.selected_objects
+        # current_active_obj = bpy.context.view_layer.objects.active
+        # select_only_one_object(source_obj)
+        # original_mode = bpy.context.object.mode
+        # bpy.ops.object.mode_set(mode='EDIT')
+        # bpy.context.view_layer.update()
+        # head = source_obj.data.edit_bones[source_bone.name].head.copy()
+        # tail = source_obj.data.edit_bones[source_bone.name].tail.copy()
+        # bpy.ops.object.mode_set(mode=original_mode)
+
+        # parent = source_obj.data.bones[source_bone.name].parent.name
+        # if not source_obj.data.bones.get('Move.ai retargeting: Temp Hips'):
+        #     temp_hips_bone = add_bone(source_obj, 'Move.ai retargeting: Temp Hips', parent_bone=parent, head=head, tail=tail)
+        # else:
+        #     temp_hips_bone = source_obj.pose.bones['Move.ai retargeting: Temp Hips']
+
+        # copy_animation_curves(source_obj, source_bone.name, source_obj, temp_hips_bone.name)
+
+        # source_bone = temp_hips_bone
+
+        # # deselect everything
+        # for selected_obj in bpy.context.selected_objects:
+        #     selected_obj.select_set(False)
+        # # get original selection back
+        # for obj in current_selection:
+        #     obj.select_set(True)
+        # bpy.context.view_layer.objects.active = current_active_obj
+
         target_bone_matrix = get_matrix(target_bone)
         source_bone_matrix = get_matrix(source_bone)
 

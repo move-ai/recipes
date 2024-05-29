@@ -158,3 +158,55 @@ def get_mapping_folder(rig_type="source"):
     mapping_folder = filepath.parent / "data/mapping_templates" / rig_type
 
     return mapping_folder
+
+def select_only_one_object(obj):
+    for selected_obj in bpy.context.selected_objects:
+        selected_obj.select_set(False)
+    obj.select_set(True)
+    bpy.context.view_layer.objects.active = obj
+
+def add_bone(rig_obj, bone_name, parent_bone=None, head=(0, 0, 0), tail=(0, 1, 0)):
+    original_mode = bpy.context.object.mode
+    armature = rig_obj.data
+    select_only_one_object(rig_obj)
+    bpy.ops.object.mode_set(mode='EDIT')
+    new_bone = armature.edit_bones.new(bone_name)
+    if parent_bone:
+        new_bone.parent = armature.edit_bones[parent_bone]
+    new_bone.head = head
+    new_bone.tail = tail
+    bpy.ops.object.mode_set(mode=original_mode)
+    return rig_obj.pose.bones[bone_name]
+
+def copy_animation_curves(source_obj, source_bone, target_obj, target_bone):
+    if source_obj.animation_data and source_obj.animation_data.action:
+        action = source_obj.animation_data.action
+        for fcurve in action.fcurves:
+            if fcurve.data_path.startswith(f'pose.bones["{source_bone}"]'):
+                target_data_path = f'pose.bones["{target_bone}"].' + fcurve.data_path.split('.')[-1]
+                
+                # Check if the fcurve already exists
+                target_fcurve = None
+                for tfcurve in action.fcurves:
+                    if tfcurve.data_path == target_data_path and tfcurve.array_index == fcurve.array_index:
+                        target_fcurve = tfcurve
+                        break
+
+                # If it doesn't exist, create a new one
+                if not target_fcurve:
+                    target_fcurve = action.fcurves.new(
+                        data_path=target_data_path,
+                        index=fcurve.array_index
+                    )
+                    target_fcurve.keyframe_points.add(len(fcurve.keyframe_points))
+                
+                # Update the keyframe points
+                for i, keyframe in enumerate(fcurve.keyframe_points):
+                    if i < len(target_fcurve.keyframe_points):
+                        target_keyframe = target_fcurve.keyframe_points[i]
+                    else:
+                        target_keyframe = target_fcurve.keyframe_points.insert(
+                            keyframe.co[0], keyframe.co[1], {'NEEDED'}
+                        )
+                    target_keyframe.co = keyframe.co
+                    target_keyframe.interpolation = keyframe.interpolation
