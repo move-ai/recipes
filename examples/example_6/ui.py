@@ -271,7 +271,7 @@ class MOVE_SDK_PT_retargeting_source_mapping_panel(
     bl_parent_id = "MOVE_SDK_PT_retargeting_source_panel"
 
     def draw(self, context):
-        self.draw_retargeting_panel(context, "target")
+        self.draw_retargeting_panel(context, "source")
 
 
 class MOVE_SDK_PT_retargeting_target_presets_panel(
