@@ -32,39 +32,71 @@ class MOVE_SDK_OT_run(Operator):
     bl_idname = "move_sdk.run"
     bl_options = {"REGISTER", "UNDO", "PRESET"}
 
-    def execute(self, context: bpy.types.Context):
-        context.window_manager.progress_begin(0, 100)
+    _timer = None
+    _job = None
+    _move = None
+    _attempts = 0
+    _outputs = None
+    _input_video_path = None
+    _output_dir = None
+    _max_attempts = 1200
 
-        move = MoveAPI(context.scene.move_sdk.general.move_api_key)
-        input_video_path = context.scene.move_sdk.general.input_video_path
-        video_file_id = move.create_files(input_video_path)
-        take = move.create_take(video_file_id)
-        job = move.create_job(take.id)
-        attempts = 0
-        while job.state != "FAILED" and attempts < 100:
-            job = move.get_job(job.id)
-            update_str = f"[{datetime.now().isoformat()} | {attempts}] Job {job.id} is {job.state}"
+    def modal(self, context, event):
+        if event.type == 'TIMER':
+            self._attempts += 1
+            job = self._move.get_job(self._job.id)
+            update_str = f"Move.ai is {job.state}. Attempt {self._attempts}. Job id: {job.id} is {job.state}"
             print(update_str)
-            context.window_manager.progress_update(attempts)
+            # context.workspace.status_text_set(update_str)  # Update status bar directly
+            self.report({"INFO"}, update_str)  # Update Info panel
+            context.window_manager.progress_update(self._attempts)
+            context.area.tag_redraw()  # Redraw the UI to reflect updates
+
             if job.state == "FINISHED":
-                input_video_filename = os.path.basename(input_video_path)
-                outputs = move.download_outputs(
+                input_video_filename = os.path.basename(self._input_video_path)
+                self._outputs = self._move.download_outputs(
                     job.id,
-                    context.scene.move_sdk.general.output_dir,
+                    self._output_dir,
                     input_video_filename.split(".")[0],
                 )
-                print(outputs)
-                break
-            else:
-                time.sleep(30)
-                attempts += 1
+                print(self._outputs)
+                context.window_manager.progress_end()
+                if context.scene.move_sdk.general.import_fbx:
+                    bpy.ops.import_scene.fbx(filepath=self._outputs[4])
+                context.window_manager.event_timer_remove(self._timer)
+                context.workspace.status_text_set(None)  # Clear status bar
+                self.report({"INFO"}, "Job completed successfully")
+                context.area.tag_redraw()
+                return {'FINISHED'}
+            elif job.state == "FAILED" or self._attempts >= self._max_attempts:
+                self.report({"ERROR"}, "Job failed or maximum attempts reached")
+                context.window_manager.progress_end()
+                context.window_manager.event_timer_remove(self._timer)
+                context.workspace.status_text_set(None)  # Clear status bar
+                context.area.tag_redraw()
+                return {'CANCELLED'}
+            
+        elif event.type == 'ESC':
+            self.report({"INFO"}, "Job cancelled by user")
+            context.window_manager.event_timer_remove(self._timer)
+            return {'CANCELLED'}
 
-        if context.scene.move_sdk.general.import_fbx:
-            bpy.ops.import_scene.fbx(filepath=outputs[4])
+        return {'RUNNING_MODAL'}
 
-        context.window_manager.progress_end()
+    def execute(self, context):
+        self._move = MoveAPI(context.scene.move_sdk.general.move_api_key)
+        self._input_video_path = context.scene.move_sdk.general.input_video_path
+        self._output_dir = context.scene.move_sdk.general.output_dir
 
-        return {"FINISHED"}
+        video_file_id = self._move.create_files(self._input_video_path)
+        take = self._move.create_take(video_file_id)
+        self._job = self._move.create_job(take.id)
+        self._attempts = 0
+
+        context.window_manager.progress_begin(0, 100)
+        self._timer = context.window_manager.event_timer_add(1.0, window=context.window)
+        context.window_manager.modal_handler_add(self)
+        return {'RUNNING_MODAL'}
 
 
 class MOVE_SDK_OT_retargeting_clear(Operator):
