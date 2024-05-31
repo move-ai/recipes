@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://move.ai">
-    <img src="/images/logo.jpeg" width="200px" alt="Move AI logo" />
+    <img src="images/logo.jpeg" width="200px" alt="Move AI logo" />
   </a>
 </p>
 
@@ -16,7 +16,7 @@ Most of the code examples are written in Python, although the concepts can be ap
 
 <p align="center">
   <a href="https://move.ai">
-    <img src="/images/breakdance.gif" width="300px" alt="Move AI logo" />
+    <img src="images/breakdance.gif" width="300px" alt="Move AI logo" />
   </a>
 </p>
 
@@ -24,14 +24,14 @@ Most of the code examples are written in Python, although the concepts can be ap
 [Video game development by Electronic Arts](https://www.youtube.com/watch?v=z0aNKvZR8Tk&t=139s).
 <p align="left">
   <a href="https://www.youtube.com/watch?v=z0aNKvZR8Tk&t=139s">
-    <img src="/images/ea.png" width="400px" alt="Move AI logo" />
+    <img src="images/ea.png" width="400px" alt="Move AI logo" />
   </a>
 </p>
 
 [Music video for MGMT's “Mother Nature” by Eye Garden](https://www.youtube.com/watch?v=sDzIO5ahGE8).
 <p align="left">
   <a href="https://www.youtube.com/watch?v=sDzIO5ahGE8">
-    <img src="/images/mgmt.png" width="400px" alt="MGMT music video" />
+    <img src="images/mgmt.png" width="400px" alt="MGMT music video" />
   </a>
 </p>
 
@@ -52,7 +52,7 @@ Features:
 * Track up to 3 people (coming soon)
 * Supports any video but best results are obtained when the camera is known
 
-[FAQs](./FAQs.md)
+[FAQs](FAQs.md)
 
 ### Multi-Camera (coming soon)
 Features:
@@ -66,15 +66,16 @@ Features:
 * Supports any video but best results are obtained when the camera is known
 
 ## Code examples
-### Example 1: Generate 3D animation data of a single person from a single video from an unknown camera
+### [Example 1](examples/example_1): Generate 3D animation data of a single person from a single video from an unknown camera
 <p align="left">
-    <img src="/images/example_1.gif" width="150px" alt="example 1 image" />
+    <img src="images/example_1.gif" width="150px" alt="example 1 image" />
 </p>
 
-[Python](./examples/python/Example_1.ipynb), [Javascript](./examples/javascript/example_1/README.md)
+[Python](examples/example_1/python/Example_1.ipynb), [Javascript](examples/example_1/javascript/README.md)
 
-### Example 2: Generate a 3D animation file of a single person from a single video from an iPhone 13
-### Example 3: Convert a 3D animation file to CSV
-### Example 4: Visualise foot step detection and ground reaction forces from a 3D animation file
-### Example 5: Estimate bone lengths from a 3D animation file
-### Example 6: Retarget animation to a character and render the result in a different environment
+### [Example 2](examples/example_2): Retarget animation to a character and render the result in a different environment
+[Blender API and retargeting video tutorial](https://www.youtube.com/watch?v=pCVHn_bMG_s)
+
+[![Blender API](images/addon_preview.gif)](https://www.youtube.com/watch?v=pCVHn_bMG_s)
+
+[Download the add-on](examples/example_2/releases/move_sdk_1_0_0.zip)
