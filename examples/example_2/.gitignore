@@ -1,0 +1,11 @@
+non-public/
+.gitkeep
+*.pyc
+
+# releases/
+.vscode/
+
+unused/
+__pycache__/
+
+# data/mapping_templates/
