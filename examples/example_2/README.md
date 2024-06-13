@@ -7,6 +7,9 @@
 3. Select downloaded .zip archive move_sdk_*.zip
 4. Click the check box to activate the add-on
 
+The add-on will appear in the N-panel (click `N` button to reveal it)
+![image](https://github.com/move-ai/recipes/assets/27821127/f2e75431-1e07-4a63-8382-d3494892d4c5)
+
 ## Usage
 
 ## API
