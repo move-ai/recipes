@@ -53,19 +53,6 @@ Most of the code examples are written in Python, although the concepts can be ap
   [More information..](https://help.move.ai/en/collections/8044422-move-multi-cam)
 
 ## Code examples
-<style>
-  table {
-      width: 100%;
-      border-collapse: collapse;
-  }
-  th, td {
-      padding: 10px;
-      text-align: left;
-  }
-  th, td {
-      border: 0px;
-  }
-</style>
 
 <table>
   <tr>
