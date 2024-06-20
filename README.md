@@ -76,7 +76,7 @@ Most of the code examples are written in Python, although the concepts can be ap
     <td>Move.ai API integrated into Blender via an add-on. Additional features: retargeting, scene import, rendering</td>
   </tr>
   <tr>
-    <td><a href="examples/Move_API_ JSON_motion_data_sample_overview.ipynb">Move_API_ JSON_motion_data_sample_overview</a></td>
+    <td><a href="examples/Move_API_ JSON_motion_data_sample_overview.ipynb">Move_API_ JSON_motion_data_sample_overview.ipynb</a></td>
     <td>Python</td>
     <td>Explore and analyse the .JSON motion data output</td>
   </tr>
