@@ -1,3 +1,6 @@
 [submodule "examples/Move_API_and_retargeting_Blender_addon"]
 	path = examples/Move_API_and_retargeting_Blender_addon
 	url = https://github.com/move-ai/Move_API_and_retargeting_Blender_addon.git
+[submodule "examples/Move_API_JavaScript_demo"]
+	path = examples/Move_API_JavaScript_demo
+	url = https://github.com/move-ai/Move_API_JavaScript_demo.git
