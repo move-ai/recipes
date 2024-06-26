@@ -14,6 +14,12 @@ formats) from 2D video input by using physics and AI based estimation techniques
 
 Most of the code examples are written in Python, although the concepts can be applied in any language.
 
+Some examples live in their own repos and are included here as submodules.
+
+So if you want to get all the examples, make sure to clone the repo recursively (GitHub .zip download will not include the submodules):
+
+`git clone --recursive https://github.com/move-ai/recipes`
+
 ## User examples
 
 | [<img src="images/ea.png" width="400px" alt="Move AI logo">](https://www.youtube.com/watch?v=z0aNKvZR8Tk&t=139s) | [<img src="images/mgmt.png" width="400px" alt="MGMT music video">](https://www.youtube.com/watch?v=sDzIO5ahGE8) |
