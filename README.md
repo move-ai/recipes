@@ -30,9 +30,9 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 ### Overview
 | Model                                                                                                                | Description                                                                                   |
 |----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| single-cam                                                                                                           | Generates spatial motion data using a single video as input, optimised for quality.           |
-| single-cam-fast <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. |
-| multi-cam <br/>(coming soon)                                                                                         | Generates spatial motion data using multiple videos as input, optimised for quality.          |
+| singlecam                                                                                                           | Generates spatial motion data using a single video as input, optimised for quality.           |
+| singlecam-turbo <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. |
+| multicam <br/>(coming soon)                                                                                         | Generates spatial motion data using multiple videos as input, optimised for quality.          |
 | multi-cam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge)) | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  |
 
 ### Single-Camera
