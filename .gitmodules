@@ -4,3 +4,6 @@
 [submodule "examples/Move_API_JavaScript_demo"]
 	path = examples/Move_API_JavaScript_demo
 	url = https://github.com/move-ai/Move_API_JavaScript_demo.git
+[submodule "examples/MoveSingleAPISwift"]
+	path = examples/MoveSingleAPISwift
+	url = https://github.com/move-ai/MoveSingleAPISwift
