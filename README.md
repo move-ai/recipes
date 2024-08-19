@@ -5,7 +5,7 @@
 </p>
 
 # Move AI Recipes
-This repo provides examples, guides and tools for using the [Move AI API](https://developers.move.ai/docs/welcome) to 
+This repo provides examples, guides and tools for using the Move API to 
 access models developed by [Move AI](https://move.ai). To run these models, you will need a Move AI API key which you 
 can request [here](https://www.move.ai/api).
 
@@ -33,9 +33,9 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 | singlecam                                                                                                           | Generates spatial motion data using a single video as input, optimised for quality.           |
 | singlecam-turbo <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. |
 | multicam <br/>(coming soon)                                                                                         | Generates spatial motion data using multiple videos as input, optimised for quality.          |
-| multi-cam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge)) | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  |
+| multicam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge)) | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  |
 
-### Single-Camera
+### singlecam
 
 * Full body tracking
 * Hand and finger tracking
@@ -43,20 +43,7 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 * Track up to 3 people (coming soon)
 * Supports any video but best results are obtained when the camera is known
 
-  [More information..](https://help.move.ai/en/collections/8029121-move-one)
-
-### Multi-Camera (coming soon)
-
-* Full body tracking
-* Hand and finger tracking
-* Track up to TK people
-* Track volumes of TKm x TKm
-* FBX, USD and Blend 3D output formats
-* Supports up to TK cameras
-* Tracks large spherical objects (e.g. basketballs, volleyballs)
-* Supports any video but best results are obtained when the camera is known
-
-  [More information..](https://help.move.ai/en/collections/8044422-move-multi-cam)
+  This model powers the [Move One iPhone app](https://apps.apple.com/us/app/move-one/id6448635527)
 
 ## Code examples
 
