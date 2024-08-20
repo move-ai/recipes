@@ -28,12 +28,12 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 
 ## Models
 ### Overview
-| Model                                                                                                                | Description                                                                                   |
-|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| singlecam                                                                                                           | Generates spatial motion data using a single video as input, optimised for quality.           |
-| singlecam-turbo <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. |
-| multicam <br/>(coming soon)                                                                                         | Generates spatial motion data using multiple videos as input, optimised for quality.          |
-| multicam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge)) | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  |
+| Model                                                                                                                | Description                                                                                   | Inference time                        |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
+| singlecam                                                                                                            | Generates spatial motion data using a single video as input, optimised for quality.           | 25-30s for 10s, 60fps, HD             |
+| singlecam-turbo <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. | 10s for 10s, 60fps, HD                |
+| multicam <br/>(coming soon)                                                                                          | Generates spatial motion data using multiple videos as input, optimised for quality.          | 2.5mins for 10s, 60fps, HD, 4 cameras |
+| multicam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge))  | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  | <120ms latency                        |
 
 ### singlecam
 
