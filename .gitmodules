@@ -9,3 +9,4 @@
 [submodule "examples/MoveSingleAPISwift"]
 	path = examples/MoveSingleAPISwift
 	url = https://github.com/move-ai/MoveSingleAPISwift
+	branch = main
