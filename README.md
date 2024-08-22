@@ -18,7 +18,7 @@ Some examples live in their own repos and are included here as submodules.
 
 So if you want to get all the examples, make sure to clone the repo recursively (GitHub .zip download will not include the submodules):
 
-`git clone --recursive https://github.com/move-ai/recipes`
+`git clone --recurse-submodules --remote-submodules git@github.com:move-ai/recipes.git`
 
 ## User examples
 
