@@ -48,7 +48,7 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 
 * Full body tracking
 * Hand and finger tracking
-* Camera calibration output (can you confirm we supply this?)
+* Camera calibration output (coming soon)
 * FBX, USD and Blend 3D output formats
 * Track up to 5 people
 
