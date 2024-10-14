@@ -40,7 +40,6 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 * Full body tracking
 * Hand and finger tracking
 * FBX, USD and Blend 3D output formats
-* Track up to 3 people (coming soon)
 * Supports any video but best results are obtained when the camera is known
 
   This model powers the [Move One iPhone app](https://apps.apple.com/us/app/move-one/id6448635527)
@@ -49,8 +48,9 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 
 * Full body tracking
 * Hand and finger tracking
+* Camera calibration output (can you confirm we supply this?)
 * FBX, USD and Blend 3D output formats
-* Supports any video but best results are obtained when the camera is known
+* Track up to 5 people
 
   This model currently only supports cameras listed [here](https://move-ai.github.io/move-ugc-api/getting-started/multicam/lenses/)
 
