@@ -28,22 +28,31 @@ So if you want to get all the examples, make sure to clone the repo recursively 
 
 ## Models
 ### Overview
-| Model                                                                                                                | Description                                                                                   | Inference time                        |
-|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
-| singlecam                                                                                                            | Generates spatial motion data using a single video as input, optimised for quality.           | 25-30s for 10s, 60fps, HD             |
-| singlecam-turbo <br/>(coming soon)                                                                                   | Generates spatial motion data using a single video as input, optimised for speed and quality. | 10s for 10s, 60fps, HD                |
-| multicam <br/>(coming soon)                                                                                          | Generates spatial motion data using multiple videos as input, optimised for quality.          | 2.5mins for 10s, 60fps, HD, 4 cameras |
-| multicam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge))  | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  | <120ms latency                        |
+| Model                                                                                                               | Description                                                                                   | Inference time                        |
+|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
+| singlecam                                                                                                           | Generates spatial motion data using a single video as input, optimised for quality.           | 25-30s for 10s, 60fps, HD             |
+| singlecam-turbo <br/>(coming soon)                                                                                  | Generates spatial motion data using a single video as input, optimised for speed and quality. | 10s for 10s, 60fps, HD                |
+| multicam                                                                                          | Generates spatial motion data using multiple videos as input, optimised for quality.          | 2.5mins for 10s, 60fps, HD, 4 cameras |
+| multicam-rt <br/>([available now, request access here](https://share-eu1.hsforms.com/1J1WzWmHUT_aXIlmv7-b3xwfk5ge)) | Generates spatial motion data using multiple videos as input, optimised for real-time speed.  | <120ms latency                        |
 
 ### singlecam
 
 * Full body tracking
 * Hand and finger tracking
 * FBX, USD and Blend 3D output formats
-* Track up to 3 people (coming soon)
 * Supports any video but best results are obtained when the camera is known
 
   This model powers the [Move One iPhone app](https://apps.apple.com/us/app/move-one/id6448635527)
+
+### multicam
+
+* Full body tracking
+* Hand and finger tracking
+* Camera calibration output (coming soon)
+* FBX, USD and Blend 3D output formats
+* Track up to 5 people
+
+  This model currently only supports cameras listed [here](https://move-ai.github.io/move-ugc-api/getting-started/multicam/lenses/)
 
 ## Code examples
 
