@@ -68,6 +68,11 @@ So if you want to get all the examples, make sure to clone the repo recursively 
     <td>Generate 3D animation data of a single person from a single video from an unknown camera</td>
   </tr>
   <tr>
+    <td><a href="examples/Move_API_single_person_multiple_video_go_pro.ipynb">Move_API_single_person_multiple_video_go_pro.ipynb</a></td>
+    <td>Python</td>
+    <td>Generate 3D animation data of a single person from multiple videos from a gopro</td>
+  </tr>
+  <tr>
     <td><a href="https://github.com/move-ai/Move_API_JavaScript_demo">Move_API_JavaScript_demo</a></td>
     <td>JavaScript</td>
     <td>Generate 3D animation data of a single person from a single video from an unknown camera</td>
