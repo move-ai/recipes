@@ -6,8 +6,7 @@
 
 # Move AI Recipes
 This repo provides examples, guides and tools for using the Move API to 
-access models developed by [Move AI](https://move.ai). To run these models, you will need a Move AI API key which you 
-can request [here](https://www.move.ai/api).
+access models developed by [Move AI](https://move.ai). To run these models, sign up to the Team plan [here](https://platform.move.ai).
 
 The models generate spatial motion data related to humans (e.g. human motion and camera positions in different file 
 formats) from 2D video input by using physics and AI based estimation techniques.
